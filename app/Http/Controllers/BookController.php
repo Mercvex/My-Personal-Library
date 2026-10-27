@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $books = auth()->user()
             ->books()
@@ -19,12 +21,12 @@ class BookController extends Controller
         return view('books.index', compact('books'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('books.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
@@ -52,21 +54,21 @@ class BookController extends Controller
             ->with('success', 'Book added successfully.');
     }
 
-    public function show(Book $book)
+    public function show(Book $book): View
     {
         $this->authorizeBook($book);
 
         return view('books.show', compact('book'));
     }
 
-    public function edit(Book $book)
+    public function edit(Book $book): View
     {
         $this->authorizeBook($book);
 
         return view('books.edit', compact('book'));
     }
 
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Book $book): RedirectResponse
     {
         $this->authorizeBook($book);
 
@@ -100,7 +102,7 @@ class BookController extends Controller
             ->with('success', 'Book updated successfully.');
     }
 
-    public function destroy(Book $book)
+    public function destroy(Book $book): RedirectResponse
     {
         $this->authorizeBook($book);
 

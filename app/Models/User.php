@@ -57,6 +57,7 @@ class User extends Authenticatable
             : $initials;
     }
 
+    /** @return HasMany<Book, $this> */
     public function books(): HasMany
     {
         return $this->hasMany(Book::class);

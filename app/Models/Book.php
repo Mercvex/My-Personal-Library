@@ -5,6 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property string $title
+ * @property string $author
+ * @property string|null $category
+ * @property string $status
+ * @property string|null $cover_image
+ * @property int|null $current_page
+ * @property string|null $summary
+ * @property bool $is_favorite
+ */
 class Book extends Model
 {
     protected $fillable = [
@@ -27,6 +39,7 @@ class Book extends Model
         ];
     }
 
+    /** @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
