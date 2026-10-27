@@ -2,20 +2,6 @@
 
 @section('title', 'Dashboard')
 @section('content')
-    @php
-        $books = auth()->user()->books()->latest()->get();
-
-        $totalBooks = $books->count();
-        $currentlyReading = $books->where('status', 'Currently Reading')->count();
-        $finishedReading = $books->where('status', 'Finished Reading')->count();
-        $recentBooks = $books->take(4);
-        $favoriteBooks = $books->where('is_favorite', true)->take(4);
-
-        $readingProgress = $totalBooks > 0
-            ? round(($finishedReading / $totalBooks) * 100)
-            : 0;
-    @endphp
-
     <section class="page-heading">
         <h1>Good evening, {{ auth()->user()->name }}</h1>
         <p>Here's a quick look at your reading collection.</p>
@@ -132,16 +118,23 @@
             <div class="progress-track">
                 <div
                     class="progress-fill"
-                    style="width: {{ $readingProgress }}%"
+                    style="width: {{ $completionProgress }}%"
                 ></div>
             </div>
 
             <div class="progress-details">
-                <strong>{{ $readingProgress }}%</strong>
+                <strong>{{ $completionProgress }}%</strong>
                 <span class="muted">
                     {{ $finishedReading }} of {{ $totalBooks }} books finished
                 </span>
             </div>
+
+            @if ($avgReadingProgress !== null)
+                <p class="muted" style="margin-top: 14px; font-size: 13px;">
+                    Average page progress across tracked books:
+                    <strong>{{ $avgReadingProgress }}%</strong>
+                </p>
+            @endif
         </div>
 
         <div class="panel">

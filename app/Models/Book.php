@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -13,9 +14,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $category
  * @property string $status
  * @property string|null $cover_image
+ * @property string|null $book_file_path
+ * @property string|null $original_filename
  * @property int|null $current_page
+ * @property int|null $total_pages
  * @property string|null $summary
- * @property bool $is_favorite
  */
 class Book extends Model
 {
@@ -26,16 +29,18 @@ class Book extends Model
         'category',
         'status',
         'cover_image',
+        'book_file_path',
+        'original_filename',
         'current_page',
+        'total_pages',
         'summary',
-        'is_favorite',
     ];
 
     protected function casts(): array
     {
         return [
             'current_page' => 'integer',
-            'is_favorite' => 'boolean',
+            'total_pages'  => 'integer',
         ];
     }
 
@@ -43,5 +48,11 @@ class Book extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /** Users who have favorited this book. @return BelongsToMany<User, $this> */
+    public function favoritedBy(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favorites');
     }
 }

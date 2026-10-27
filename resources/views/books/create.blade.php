@@ -81,10 +81,25 @@
                     type="file"
                     id="cover_image"
                     name="cover_image"
-                    accept="image/png,image/jpeg,image/jpg"
+                    accept="image/jpeg,image/jpg,image/png,image/webp"
                 >
-                <p class="muted">PNG or JPG, maximum 2 MB.</p>
+                <p class="muted">JPEG, PNG, or WebP, maximum 2 MB.</p>
                 @error('cover_image')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="book_file">Book File <span class="muted">(Optional)</span></label>
+                <input
+                    class="form-control"
+                    type="file"
+                    id="book_file"
+                    name="book_file"
+                    accept=".pdf,.txt"
+                >
+                <p class="muted">PDF or TXT, maximum 20 MB.</p>
+                @error('book_file')
                     <p class="field-error">{{ $message }}</p>
                 @enderror
             </div>
@@ -96,11 +111,27 @@
                     type="number"
                     id="current_page"
                     name="current_page"
-                    min="1"
+                    min="0"
                     value="{{ old('current_page') }}"
-                    placeholder="Enter your current page"
+                    placeholder="Enter your current page number"
                 >
                 @error('current_page')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="total_pages">Total Pages <span class="muted">(Optional)</span></label>
+                <input
+                    class="form-control"
+                    type="number"
+                    id="total_pages"
+                    name="total_pages"
+                    min="1"
+                    value="{{ old('total_pages') }}"
+                    placeholder="Enter the total number of pages"
+                >
+                @error('total_pages')
                     <p class="field-error">{{ $message }}</p>
                 @enderror
             </div>

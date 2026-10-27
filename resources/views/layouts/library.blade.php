@@ -36,13 +36,18 @@
                 </a>
 
                 <a href="{{ route('books.index') }}"
-                   class="nav-link {{ request()->routeIs('books.index', 'books.show', 'books.edit') ? 'active' : '' }}">
+                   class="nav-link {{ request()->routeIs('books.index', 'books.show', 'books.edit', 'books.read') ? 'active' : '' }}">
                     My Books
                 </a>
 
                 <a href="{{ route('books.create') }}"
                    class="nav-link {{ request()->routeIs('books.create') ? 'active' : '' }}">
                     Add Book
+                </a>
+
+                <a href="{{ route('favorites.index') }}"
+                   class="nav-link {{ request()->routeIs('favorites.index') ? 'active' : '' }}">
+                    ★ Favorites
                 </a>
             </nav>
 
@@ -71,7 +76,7 @@
 
             <div class="page-content">
                 @if (session('success'))
-                    <div class="panel" style="margin-bottom: 20px; color: #246b45;">
+                    <div class="alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
