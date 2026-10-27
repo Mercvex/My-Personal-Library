@@ -40,7 +40,7 @@ class Book extends Model
     {
         return [
             'current_page' => 'integer',
-            'total_pages'  => 'integer',
+            'total_pages' => 'integer',
         ];
     }
 

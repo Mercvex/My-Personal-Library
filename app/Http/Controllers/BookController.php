@@ -14,8 +14,8 @@ class BookController extends Controller
 {
     public function index(Request $request): View
     {
-        $search   = $request->string('search')->trim()->value();
-        $status   = $request->string('status')->trim()->value();
+        $search = $request->string('search')->trim()->value();
+        $status = $request->string('status')->trim()->value();
         $favorite = $request->boolean('favorite');
 
         $books = auth()->user()
@@ -23,8 +23,8 @@ class BookController extends Controller
             ->when($search !== '', function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', '%'.$search.'%')
-                      ->orWhere('author', 'like', '%'.$search.'%')
-                      ->orWhere('category', 'like', '%'.$search.'%');
+                        ->orWhere('author', 'like', '%'.$search.'%')
+                        ->orWhere('category', 'like', '%'.$search.'%');
                 });
             })
             ->when($status !== '', function ($query) use ($status) {
@@ -49,15 +49,15 @@ class BookController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'title'        => ['required', 'string', 'max:255'],
-            'author'       => ['required', 'string', 'max:255'],
-            'category'     => ['nullable', 'string', 'max:255'],
-            'status'       => ['required', Rule::in(['Currently Reading', 'Finished Reading'])],
-            'cover_image'  => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
-            'book_file'    => ['nullable', 'file', 'mimes:pdf,txt', 'max:20480'],
+            'title' => ['required', 'string', 'max:255'],
+            'author' => ['required', 'string', 'max:255'],
+            'category' => ['nullable', 'string', 'max:255'],
+            'status' => ['required', Rule::in(['Currently Reading', 'Finished Reading'])],
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
+            'book_file' => ['nullable', 'file', 'mimes:pdf,txt', 'max:20480'],
             'current_page' => ['nullable', 'integer', 'min:0'],
-            'total_pages'  => ['nullable', 'integer', 'min:1'],
-            'summary'      => ['nullable', 'string'],
+            'total_pages' => ['nullable', 'integer', 'min:1'],
+            'summary' => ['nullable', 'string'],
         ]);
 
         if (
@@ -76,7 +76,7 @@ class BookController extends Controller
         }
 
         if ($request->hasFile('book_file')) {
-            $file                        = $request->file('book_file');
+            $file = $request->file('book_file');
             $validated['book_file_path'] = $file->store('book-files', 'local');
             $validated['original_filename'] = $file->getClientOriginalName();
         }
@@ -112,15 +112,15 @@ class BookController extends Controller
         $this->authorizeBook($book);
 
         $validated = $request->validate([
-            'title'        => ['required', 'string', 'max:255'],
-            'author'       => ['required', 'string', 'max:255'],
-            'category'     => ['nullable', 'string', 'max:255'],
-            'status'       => ['required', Rule::in(['Currently Reading', 'Finished Reading'])],
-            'cover_image'  => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
-            'book_file'    => ['nullable', 'file', 'mimes:pdf,txt', 'max:20480'],
+            'title' => ['required', 'string', 'max:255'],
+            'author' => ['required', 'string', 'max:255'],
+            'category' => ['nullable', 'string', 'max:255'],
+            'status' => ['required', Rule::in(['Currently Reading', 'Finished Reading'])],
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
+            'book_file' => ['nullable', 'file', 'mimes:pdf,txt', 'max:20480'],
             'current_page' => ['nullable', 'integer', 'min:0'],
-            'total_pages'  => ['nullable', 'integer', 'min:1'],
-            'summary'      => ['nullable', 'string'],
+            'total_pages' => ['nullable', 'integer', 'min:1'],
+            'summary' => ['nullable', 'string'],
         ]);
 
         if (
@@ -145,9 +145,9 @@ class BookController extends Controller
         $oldBookFilePath = $book->book_file_path;
         $newBookFilePath = null;
         if ($request->hasFile('book_file')) {
-            $file                           = $request->file('book_file');
-            $newBookFilePath                = $file->store('book-files', 'local');
-            $validated['book_file_path']    = $newBookFilePath;
+            $file = $request->file('book_file');
+            $newBookFilePath = $file->store('book-files', 'local');
+            $validated['book_file_path'] = $newBookFilePath;
             $validated['original_filename'] = $file->getClientOriginalName();
         }
 
@@ -174,7 +174,7 @@ class BookController extends Controller
     {
         $this->authorizeBook($book);
 
-        $coverPath    = $book->cover_image;
+        $coverPath = $book->cover_image;
         $bookFilePath = $book->book_file_path;
 
         $book->delete();
@@ -238,7 +238,7 @@ class BookController extends Controller
         abort_unless(Storage::disk('local')->exists($book->book_file_path), 404);
 
         // Determine content type from the stored extension
-        $extension   = strtolower(pathinfo($book->book_file_path, PATHINFO_EXTENSION));
+        $extension = strtolower(pathinfo($book->book_file_path, PATHINFO_EXTENSION));
         $contentType = $extension === 'pdf' ? 'application/pdf' : 'text/plain; charset=utf-8';
 
         $fileContents = Storage::disk('local')->get($book->book_file_path);

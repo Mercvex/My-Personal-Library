@@ -11,9 +11,9 @@ class DashboardController extends Controller
         $user = auth()->user();
 
         // Efficient individual counts — no full collection load
-        $totalBooks      = $user->books()->count();
+        $totalBooks = $user->books()->count();
         $currentlyReading = $user->books()->where('status', 'Currently Reading')->count();
-        $finishedReading  = $user->books()->where('status', 'Finished Reading')->count();
+        $finishedReading = $user->books()->where('status', 'Finished Reading')->count();
 
         // Completion percentage: finished / total books
         $completionProgress = $totalBooks > 0
