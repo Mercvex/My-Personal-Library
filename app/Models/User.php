@@ -64,7 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(Book::class);
     }
 
-    /** Books this user has favorited. @return BelongsToMany<Book, $this> */
+    /**
+     * Books this user has favorited.
+     *
+     * @return BelongsToMany<Book, $this>
+     */
     public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Book::class, 'favorites');

@@ -50,7 +50,11 @@ class Book extends Model
         return $this->belongsTo(User::class);
     }
 
-    /** Users who have favorited this book. @return BelongsToMany<User, $this> */
+    /**
+     * Users who have favorited this book.
+     *
+     * @return BelongsToMany<User, $this>
+     */
     public function favoritedBy(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'favorites');
