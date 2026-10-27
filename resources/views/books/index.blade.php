@@ -43,7 +43,10 @@
     @else
         <div class="books-grid">
             @foreach ($books as $book)
-                <article class="book-card">   
+                @php
+                    $isFav = auth()->user()->favorites()->where('book_id', $book->id)->exists();
+                @endphp
+                <article class="book-card">
                     @if ($book->cover_image)
                         <div class="book-cover">
                             <img
@@ -52,10 +55,8 @@
                             >
                         </div>
                     @else
-                        <div class="book-cover-placeholder">No Cover Available</div>
+                        <div class="book-cover book-cover-placeholder">No Cover Available</div>
                     @endif
-
-
 
                     <div class="book-info">
                         <h2 class="book-title">{{ $book->title }}</h2>
@@ -70,6 +71,13 @@
                         <div class="book-actions">
                             <a href="{{ route('books.show', $book) }}">Details</a>
                             <a href="{{ route('books.edit', $book) }}">Edit</a>
+
+                            <form action="{{ route('books.favorite', $book) }}" method="POST">
+                                @csrf
+                                <button type="submit" title="{{ $isFav ? 'Remove from reading list' : 'Add to reading list' }}">
+                                    {{ $isFav ? '★' : '☆' }}
+                                </button>
+                            </form>
 
                             <form
                                 action="{{ route('books.destroy', $book) }}"
