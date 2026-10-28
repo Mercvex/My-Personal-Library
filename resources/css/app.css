@@ -534,9 +534,13 @@ textarea.form-control {
 .dashboard-columns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
+    align-items: stretch;
     gap: 24px;
     margin-bottom: 24px;
+}
+
+.dashboard-columns > .panel {
+    height: 100%;
 }
 
 .stat-card {
@@ -559,13 +563,6 @@ textarea.form-control {
 .stat-card .muted {
     margin: 0;
     font-size: 13px;
-}
-
-.dashboard-columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-    margin-bottom: 24px;
 }
 
 .section-heading {

@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="page-heading">
-        <h1>★ My Favorites</h1>
+        <h1>My Favorites</h1>
         <p>Books you have starred in your personal collection.</p>
     </section>
 

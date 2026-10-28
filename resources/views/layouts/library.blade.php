@@ -47,7 +47,7 @@
 
                 <a href="{{ route('favorites.index') }}"
                    class="nav-link {{ request()->routeIs('favorites.index') ? 'active' : '' }}">
-                    ★ Favorites
+                   Favorites
                 </a>
             </nav>
 

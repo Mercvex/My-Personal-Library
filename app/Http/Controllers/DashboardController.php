@@ -10,17 +10,14 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        // Efficient individual counts — no full collection load
         $totalBooks = $user->books()->count();
         $currentlyReading = $user->books()->where('status', 'Currently Reading')->count();
         $finishedReading = $user->books()->where('status', 'Finished Reading')->count();
 
-        // Completion percentage: finished / total books
         $completionProgress = $totalBooks > 0
             ? round(($finishedReading / $totalBooks) * 100)
             : 0;
 
-        // Average per-book reading progress across books that have both fields set
         $booksWithProgress = $user->books()
             ->whereNotNull('current_page')
             ->whereNotNull('total_pages')
@@ -30,10 +27,8 @@ class DashboardController extends Controller
 
         $avgReadingProgress = $booksWithProgress !== null ? (int) $booksWithProgress : null;
 
-        // 4 most recently added books
         $recentBooks = $user->books()->latest()->limit(4)->get();
 
-        // 4 favorited books for the reading list widget
         $favoriteBooks = $user->favorites()->latest('favorites.book_id')->limit(4)->get();
 
         return view('dashboard', compact(

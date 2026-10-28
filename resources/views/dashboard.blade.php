@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 @section('content')
     <section class="page-heading">
-        <h1>Good evening, {{ auth()->user()->name }}</h1>
+        <h1>Hi, {{ auth()->user()->name }}</h1>
         <p>Here's a quick look at your reading collection.</p>
     </section>
 
@@ -139,8 +139,8 @@
 
         <div class="panel">
             <div class="section-heading">
-                <h2>My Reading List</h2>
-                <a href="{{ route('books.index', ['favorite' => 1]) }}">View all</a>
+                <h2>My Favorites</h2>
+                <a href="{{ route('favorites.index') }}">View all</a>
             </div>
 
             @forelse ($favoriteBooks as $book)
