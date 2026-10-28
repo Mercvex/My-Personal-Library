@@ -16,7 +16,11 @@ WORKDIR /app
 COPY . .
 COPY --from=assets /app/public/build ./public/build
 RUN composer install --no-dev --optimize-autoloader
-RUN chown -R www-data:www-data storage bootstrap/cache
+RUN mkdir -p storage/logs storage/framework/cache/data storage/framework/sessions storage/framework/views storage/framework/testing bootstrap/cache \
+    && chown -R 1000:1000 storage bootstrap/cache \
+    && chmod -R ug+rwX storage bootstrap/cache
+ENV XDG_CONFIG_HOME=/tmp/caddy-config
+ENV XDG_DATA_HOME=/tmp/caddy-data
 ENV APP_ENV=production
 ENV APP_DEBUG=false
-CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && frankenphp php-server -r public"]
+CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && frankenphp php-server -r public --listen :8080"]
