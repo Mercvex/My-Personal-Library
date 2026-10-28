@@ -887,7 +887,6 @@ textarea.form-control {
     border: 1px solid var(--library-border);
 }
 
-/* ── Reader page ────────────────────────────────────────────── */
 .reader-header {
     display: flex;
     align-items: center;
@@ -905,7 +904,6 @@ textarea.form-control {
     background: #fff;
 }
 
-/* ── File info badge (forms + detail page) ──────────────────── */
 .file-info {
     display: inline-block;
     margin-top: 4px;
@@ -919,7 +917,6 @@ textarea.form-control {
     word-break: break-all;
 }
 
-/* ── Book file section on detail page ───────────────────────── */
 .book-file-section {
     margin-top: 24px;
     padding-top: 20px;
@@ -934,4 +931,267 @@ textarea.form-control {
 
 .book-file-section p {
     margin: 0 0 8px;
+}
+
+body:has(form[action*="login"]),
+body:has(form[action*="register"]) {
+    background-color: #f6f8fc !important;
+    color: #17253a !important;
+    color-scheme: light;
+}
+
+body:has(form[action*="login"]) :is(h1, h2, [data-flux-heading], [data-flux-subheading], [data-flux-label], [data-flux-label] *),
+body:has(form[action*="register"]) :is(h1, h2, [data-flux-heading], [data-flux-subheading], [data-flux-label], [data-flux-label] *) {
+    color: #17253a !important;
+}
+
+body:has(form[action*="login"]) [data-flux-control]:not([data-flux-checkbox]),
+body:has(form[action*="register"]) [data-flux-control]:not([data-flux-checkbox]) {
+    background-color: #edf1f7 !important;
+    color: #17253a !important;
+    border-color: #e2e7ef !important;
+}
+
+body:has(form[action*="login"]) input,
+body:has(form[action*="register"]) input {
+    color: #17253a !important;
+}
+
+body:has(form[action*="login"]) input::placeholder,
+body:has(form[action*="register"]) input::placeholder {
+    color: #758196 !important;
+    opacity: 1;
+}
+
+body:has(form[action*="login"]) button[type="submit"],
+body:has(form[action*="register"]) button[type="submit"] {
+    background-color: #5277c8 !important;
+    color: #ffffff !important;
+    border-color: #5277c8 !important;
+}
+
+body:has(form[action*="login"]) a,
+body:has(form[action*="register"]) a {
+    color: #5277c8 !important;
+}
+
+/* Teks abu-abu di bawah form */
+body:has(form[action*="login"]) .text-zinc-600,
+body:has(form[action*="register"]) .text-zinc-600 {
+    color: #9aa3b2 !important;
+}
+
+
+.welcome-page {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #f8faff;
+    color: #17253a;
+    font-family: "Fira Sans", sans-serif;
+}
+
+.welcome-header {
+    width: 100%;
+    padding: 28px 6%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-nav {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.welcome-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 24px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.welcome-button-outline {
+    color: #3478cf;
+    background: #ffffff;
+    border-color: #d5dfef;
+}
+
+.welcome-button-outline:hover {
+    background: #edf3fc;
+    border-color: #3478cf;
+}
+
+.welcome-button-primary {
+    color: #ffffff;
+    background: #3478cf;
+    border-color: #3478cf;
+}
+
+.welcome-button-primary:hover {
+    background: #2865b4;
+    border-color: #2865b4;
+}
+
+.welcome-hero {
+    flex: 1;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 30px 6% 55px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 24px;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 1;
+    max-width: 610px;
+}
+
+.welcome-eyebrow {
+    margin-bottom: 22px;
+    color: #3478cf;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+}
+
+.welcome-content h1 {
+    margin: 0 0 26px;
+    color: #1b2b42;
+    font-size: clamp(44px, 5.2vw, 76px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -2px;
+}
+
+.welcome-content h1 span {
+    display: block;
+    color: #3478cf;
+}
+
+.welcome-description {
+    max-width: 560px;
+    margin-bottom: 30px;
+    color: #758196;
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+.welcome-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.welcome-text-link {
+    color: #3478cf;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.welcome-text-link:hover {
+    text-decoration: underline;
+}
+
+.welcome-image-wrapper {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.welcome-image {
+    display: block;
+    width: 115%;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.35) 12%,
+        black 36%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.35) 12%,
+        black 36%
+    );
+}
+
+.welcome-footer {
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid #e2e7ef;
+    color: #758196;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+}
+
+@media (max-width: 768px) {
+    .welcome-header {
+        padding: 22px 6%;
+    }
+
+    .welcome-hero {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 40px 7% 25px;
+    }
+
+    .welcome-content h1 {
+        font-size: clamp(42px, 10vw, 60px);
+    }
+
+    .welcome-description {
+        font-size: 15px;
+    }
+
+    .welcome-image-wrapper {
+        margin-top: 5px;
+    }
+
+    .welcome-image {
+        width: 100%;
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 20%,
+            black 85%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 20%,
+            black 85%,
+            transparent 100%
+        );
+    }
+
+    .welcome-footer {
+        flex-direction: column;
+        font-size: 10px;
+    }
 }
