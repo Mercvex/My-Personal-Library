@@ -3,7 +3,7 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-scripts --ignore-platform-reqs --prefer-dist
 
-FROM node:22-alpine AS assets
+FROM node:22-slim AS assets
 WORKDIR /app
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
