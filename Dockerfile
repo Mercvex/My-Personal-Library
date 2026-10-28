@@ -11,6 +11,7 @@ RUN npm ci && npm run build
 
 FROM dunglas/frankenphp:1-php8.4
 RUN install-php-extensions pdo_pgsql mbstring bcmath gd intl zip opcache
+RUN printf 'upload_max_filesize=32M\npost_max_size=40M\nmemory_limit=256M\n' > /usr/local/etc/php/conf.d/uploads.ini
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY . .
